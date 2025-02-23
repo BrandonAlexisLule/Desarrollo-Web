@@ -33,11 +33,23 @@ El proyecto se creará. Una vez finalizado:
 9. Ahora EJECUTA el comando ```git push -u origin main``` para alojar los archivos al repositorioe en Github.
 10. Revisa el repositorio en la página y verifica los archivos subidos.
 
+### Pasos breves sin explicación
+```
+1. git init
+2. git status
+3. git add . o git add <file_name>
+4. git commit -m 'Tu mensaje personalizado aquí'
+5. git config --global user.mail <your-email@example.com>
+6. git config --global user.name <nombre-en-github>
+7. git branch -M main
+8. git remote add origin <url>
+9. git push -u origin main
+```
 ## Errores que pueden ocurrir al querer subir tus archivos.
 ```
-To https://github.com/BrandonAlexisLule/Desarrollo-Web.git
+To https://github.com/nombre_usuario/nombre_repositorio.git
  ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/BrandonAlexisLule/Desarrollo-Web.git'
+error: failed to push some refs to 'https://github.com/nombre_usuario/nombre_repositorio.git'
 hint: Updates were rejected because the remote contains work that you do not
 hint: have locally. This is usually caused by another repository pushing to
 hint: the same ref. If you want to integrate the remote changes, use
@@ -47,7 +59,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ### Para corregirlos, debes hacer lo siguiente:
 * ```git fetch origin main:tmp```
 * ```git rebase tmp```
-* ```git push -u origin main```
+* ```git push -u origin main```<br>
 Al ejecutar los comandos anteriores, UNO POR UNO, debe solucionarse el error y al hacer el **push** (comando anterior) te debe de cargar el siguiente mensaje:
 ```
 Enumerating objects: 47, done.
@@ -57,13 +69,7 @@ Compressing objects: 100% (42/42), done.
 Writing objects: 100% (46/46), 22.24 KiB | 2.22 MiB/s, done.
 Total 46 (delta 9), reused 0 (delta 0), pack-reused 0 (from 0)
 remote: Resolving deltas: 100% (9/9), done.
-To https://github.com/BrandonAlexisLule/Desarrollo-Web.git
+To https://github.com/nombre_usuario/nombre_repositorio.git
    6011bba..211e63f  main -> main
 branch 'main' set up to track 'origin/main'.
 ```
-
-### Pasos breves sin explicación
-1. ```git init```
-2. ```git status```
-3. ```git add .``` o ```git add <file_name>```
-4. ```git commit -m 'Tu mensaje personalizado aquí'```
