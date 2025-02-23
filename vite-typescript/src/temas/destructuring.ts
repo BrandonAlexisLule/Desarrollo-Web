@@ -61,7 +61,7 @@ const {nombre, edad, apodo, superpoder = 'Volar'} = persona
 
 //Va a imprimir las propiedades y los valores del objeto
 console.log({nombre, edad, apodo, superpoder})
-
+console.log('Este es un nuevo mensaje')
 
 
 
