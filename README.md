@@ -25,7 +25,7 @@ El proyecto se creará. Una vez finalizado:
 3. AGREGA los archivos que vamos a subir a nuestro repositorio remoto con ```git add .``` o también se puede subir por achivo, por ejemplo ```git add <file_name>```.
 4. VUELVE a revisar cambios con ```git status``` y ahora se deben de ver de color verde los archivos agregados.
 5. HAZ un commit con el comando ```git commit -m 'Tu mensaje personalizado aquí'``` que es el mensaje que va con los archivos que se van a subir al repositorio. 
-6. En caso de que no tengas ningún correo asociado
+6. En caso de que no tengas ningún correo y nombre de usuario asociado
    - DEBES ejecutar el siguiente comando ```git config --global user.mail <your-email@example.com>```. En **```<your-email@example.com>```** Debes colocar tu correo del   instituto o personal sin el ```<``` ni ```>```.
    - Posteriormente, ejecuta el comando ```git config --global user.name <nombre-en-github>``` y en **```<nombre-en-github>```** va el nombre que tienes registrado en Github sin el ```<``` ni ```>```..
 7. Luego, escribe ```git branch -M main``` para que se suba en la rama principal tu proyecto.
