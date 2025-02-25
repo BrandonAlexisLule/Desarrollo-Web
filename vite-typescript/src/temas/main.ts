@@ -3,6 +3,7 @@ import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from '../temas/counter.ts'
 
+import '../temas/async_await.ts'
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `

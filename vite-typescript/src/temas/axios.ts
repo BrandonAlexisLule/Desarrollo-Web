@@ -4,7 +4,9 @@ import { GIFResponse } from '../interfaces/gif.response'
 const apiKey = 'Kqxt3rGJgSZsHSlFRK0okRTukJecAshD'
 
 //Creamos una variable que va a llamar a la librería de axios para mandar llamar al método create
-const giphyApi = axios.create({
+
+//exportamos giphyApi
+export const giphyApi = axios.create({
 
     //llamamos a dos de sus propiedades: baseURL y params
     baseURL: 'https://api.giphy.com/v1/gifs/random?api_key=Kqxt3rGJgSZsHSlFRK0okRTukJecAshD',
