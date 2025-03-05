@@ -2,7 +2,7 @@
 
 //Ejemplo 1: Mostrar las palabras que sólo tengan más de 7 caracteres.
 
-/**
+
 const palabras = ['Banorte', 'Citibanamex', 'BBVA Bancomer', 'Banregio', 'BanBajío' ]
 
 const listaModificada = palabras.filter((palabra) => palabra.length > 7)
