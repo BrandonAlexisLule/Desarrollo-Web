@@ -1,29 +1,24 @@
-/**
- * 
- * @returns 
- * 1. Consumir JSON: mostrar la data obtenida en consola.
- * 2. Busqueda por CATEGORIA: Buscar la categoría correspondiente e imprimir los alimentos de esa categoría.
- * 3. Busqueda por PALABRA: Buscar la palabra y que se muestre zresultados que contengan esa misma palabra.
- 
- */
-
 import axios from "axios"
 import { Smaejson } from "../interfaces/smae"
 
 /**
- * Esta función es asícrona ya que la data recibida no se debe proczesar al instante.
- * @params async : función asíncrona que envia solicitud para consumir un archivo Json.
- * @params await : es requerido por la función asíncrona 'async' que se utiliza para evitar que la información tenga su tiempo para procesarse.
+ * This function is asynchronous since the data received must not be processed instantly. It receives the food data and prints it by console.
+ * @param async asynchronous function that sends request to consume a Json file.
+ * @param await is required by the asynchronous function 'async' which is used so that the data has time to process.
+ * 
+ * @function executeJSON receives a trycatch that looks for the json food data via the path and if received, saves it.
+ * Convert the data array to an object, so that it is displayed as an object, i.e. 'key: value'.
+ * We go through with a foreach and we are stacking it so that at the end they are shown by the console.
  */
 const ejecutarJSON = async () => {
     try {
         const respuesta = await axios.get<Smaejson[]>('../data/smae.json')
         const dataJson = respuesta.data
         const keyValue: object[] = []
-        dataJson.forEach((i) => {
-            const alimento = i.Categoría
-            keyValue.push({alimento})
-            console.log({alimento})
+        dataJson.forEach((alimento) => {
+            const alimentos = alimento.Alimento
+            keyValue.push({alimentos})
+            console.log({alimentos})
         })
     } catch (error) {
         throw 'Error'
@@ -32,9 +27,15 @@ const ejecutarJSON = async () => {
 }
 
 /**
- * Esta función regresa por consola los alimentos encontrados de la categoría solicitada.
- * Hice una función Alimentos por Categoría que va a recorrer el
-*/
+ * @function busquedaPorCategoria The first one goes through the whole data array and the second function receives the data, looks for the available category that the user can indicate and prints the data.
+ * 
+ * 
+ * @function alimentosPorCategoria returns the searched category and it is independent if it was searched with a combination of uppercase or lowercase since the function is told to search in lowercase for the word.
+ * @method filter searches for the category of type Category and if found returns it.
+ * 
+ * 
+ * @function mostrarAlimentosPorCategoria tries (it receives a trycatch) to obtain the array data from the smae.json file to convert it into a 'key: value' object. Subsequently, it saves the category that the user must indicate in foodFiltered and within the Category it looks for the food, adds them to the end of the list and finally prints them.
+ */
 const busquedaPorCategoria = async () => {
     const alimentosPorCategoria = (encontrada: string, dataJson: Smaejson[]) => {
         return dataJson.filter(cat => cat.Categoría.toLowerCase() === encontrada.toLowerCase())
@@ -45,7 +46,7 @@ const busquedaPorCategoria = async () => {
             const respuesta = await axios.get<Smaejson[]>('../data/smae.json')
             const dataJson = respuesta.data
             const propValor: object[] = []
-            const alimentosFiltrados = alimentosPorCategoria('Verduras', dataJson)
+            const alimentosFiltrados = alimentosPorCategoria('Frutas', dataJson)
             propValor.push({alimentosFiltrados})
             console.log(alimentosFiltrados)
         } catch (error) {  
@@ -55,6 +56,18 @@ const busquedaPorCategoria = async () => {
     mostrarAlimentosPorCategoria()
 }
 
+
+/**
+ * This function performs a word search, i.e. all characters that match will be printed on the screen.
+ * It has two subfunctions:
+ * @function buscarCoincidencias returns all words found in both category and food within the array of food and category data if such a match exists.
+ * @method filter searches for words that are included in all matches.
+ * 
+ * 
+ * @function coincidenciasEncontradas receives the data from smae.json to collect all the words that were found by matching the user's input to typescript.
+ * The found words are saved and searched for in the json file data.
+ * @param palabras The user tells typescript the match and it internally looks up the words that were found with that match.
+ */
 const busquedaPorPalabra = async () => {
     const buscarCoincidencias = (palabra:string, dataJson:Smaejson) => {
         return dataJson.filter(coincidencia =>
