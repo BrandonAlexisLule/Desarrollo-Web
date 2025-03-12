@@ -1,4 +1,5 @@
-import axios from "axios"
+
+import axios from "axios" 
 import { Smaejson } from "../interfaces/smae"
 
 /**
@@ -17,13 +18,12 @@ const ejecutarJSON = async () => {
         const keyValue: object[] = []
         dataJson.forEach((alimento) => {
             const alimentos = alimento.Alimento
-            keyValue.push({alimentos})
+            keyValue.push(alimento)
             console.log({alimentos})
         })
     } catch (error) {
         throw 'Error'
     }
-
 }
 
 /**
@@ -40,14 +40,11 @@ const busquedaPorCategoria = async () => {
     const alimentosPorCategoria = (encontrada: string, dataJson: Smaejson[]) => {
         return dataJson.filter(cat => cat.Categoría.toLowerCase() === encontrada.toLowerCase())
     }
-
     const mostrarAlimentosPorCategoria = async () =>{
         try {
             const respuesta = await axios.get<Smaejson[]>('../data/smae.json')
             const dataJson = respuesta.data
-            const propValor: object[] = []
             const alimentosFiltrados = alimentosPorCategoria('Frutas', dataJson)
-            propValor.push({alimentosFiltrados})
             console.log(alimentosFiltrados)
         } catch (error) {  
             throw '404. Not Found. La data no se pudo cargar'
@@ -69,10 +66,15 @@ const busquedaPorCategoria = async () => {
  * @param palabras The user tells typescript the match and it internally looks up the words that were found with that match.
  */
 const busquedaPorPalabra = async () => {
+    //Creo una función que va a encontrar las coincidencias
+    /**
+     * @param palabra de tipo string, que es la cadena la cual se le van a buscar las coincidencias
+     * @param dataJson de tipo SmaeJson, es la data en la que se van a buscar esas coincidencias.
+     */
     const buscarCoincidencias = (palabra:string, dataJson:Smaejson) => {
+        //va a regresar la data de dataJson y la va a filtrar, es decir, va a buscar dentro de la propiedad 'Categoria' si la palabra 'incluye' esa coincidencia, y lo mismo pasa con la propiedad Alimento y
         return dataJson.filter(coincidencia =>
-            coincidencia.Alimento.toLowerCase().includes(palabra.toLowerCase())||
-            coincidencia.Categoría.toLowerCase().includes(palabra.toLowerCase())
+            coincidencia.Alimento.includes(palabra) || coincidencia.Categoría.includes(palabra)
         )
     }
 
@@ -85,19 +87,12 @@ const busquedaPorPalabra = async () => {
            
         } catch (error) {
             throw 'Data is not found'
-        }
-        
+        }  
     }
-    const palabras = 'Ceb'
+    const palabras = 'Fru'
     coincidenciasEncontradas(palabras)
-    
 }
-
-
-
-
+//Mando a llamar a las funciones.
 ejecutarJSON()
 busquedaPorCategoria()
 busquedaPorPalabra()
-
-
