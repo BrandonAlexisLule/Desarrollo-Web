@@ -1,6 +1,22 @@
 
 import axios from "axios" 
 import { Smaejson } from "../interfaces/smae"
+import { initializeApp } from "firebase/app";
+
+//configurar firebase para consumir el json
+const firebaseConfig = {
+    apiKey: 'AIzaSyB7lKs08fTZIX83tMD_sKSa0-6bqe_cXSI',
+    authDomain: 'alimentos-6321e.firebaseapp.com',
+    databaseURL: 'https://alimentos-6321e-default-rtdb.firebaseio.com',
+    projectId: 'alimentos-6321e',
+    storageBucked: 'alimentos-6321e.firebasestorage.app',
+    messagindSenderId: '923723549967',
+    appId: '1:923723549967:web:2569a7ec66d7c99e93c27a'
+}
+
+//inicializar firebase
+const app = initializeApp(firebaseConfig)
+
 
 /**
  * This function is asynchronous since the data received must not be processed instantly. It receives the food data and prints it by console.
@@ -13,7 +29,7 @@ import { Smaejson } from "../interfaces/smae"
  */
 const ejecutarJSON = async () => {
     try {
-        const respuesta = await axios.get<Smaejson[]>('../data/smae.json')
+        const respuesta = await axios.get<Smaejson[]>('https://alimentos-6321e-default-rtdb.firebaseio.com/.json')
         const dataJson = respuesta.data
         const keyValue: object[] = []
         dataJson.forEach((alimento) => {
@@ -42,7 +58,7 @@ const busquedaPorCategoria = async () => {
     }
     const mostrarAlimentosPorCategoria = async () =>{
         try {
-            const respuesta = await axios.get<Smaejson[]>('../data/smae.json')
+            const respuesta = await axios.get<Smaejson[]>('https://alimentos-6321e-default-rtdb.firebaseio.com/.json')
             const dataJson = respuesta.data
             const alimentosFiltrados = alimentosPorCategoria('Frutas', dataJson)
             console.log(alimentosFiltrados)
@@ -80,7 +96,7 @@ const busquedaPorPalabra = async () => {
 
     const coincidenciasEncontradas = async (palabra:string) => {
         try {
-            const respuesta = await axios.get<Smaejson>('../data/smae.json')
+            const respuesta = await axios.get<Smaejson>('https://alimentos-6321e-default-rtdb.firebaseio.com/.json')
             const dataJson = respuesta.data
             const palabrasEncontradas = buscarCoincidencias(palabra, dataJson)
             console.log(palabrasEncontradas)
